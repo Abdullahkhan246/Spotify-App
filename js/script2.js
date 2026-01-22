@@ -74,7 +74,7 @@ async function displayAlbums() {
     console.log("displaying albums");
     let a = await fetch(`/songs/songs.json`);
     let response = await a.json();
-    let cardContainer = document.querySelector(".cardcontainer"); // Ensure lowercase 'c' matches HTML
+    let cardContainer = document.querySelector(".cardContainer"); // Ensure lowercase 'c' matches HTML
     cardContainer.innerHTML = "";
     
     for (const folder of response) {
