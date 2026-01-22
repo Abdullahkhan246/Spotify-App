@@ -22,23 +22,23 @@ function secondsToMinutesSeconds(seconds) {
  async function getSongs (folder){
 currFolder = folder;
 
-    let a = await fetch (`/${folder}/`);
-let response = await a.text();
-let div = document.createElement("div");
-div.innerHTML = response;
-let as = div.getElementsByTagName("a");
- songs = []
-for (let index = 0; index < as.length; index++) {
-    const element = as[index];
-if(element.href.endsWith(".mp3") || element.href.endsWith(".mp4")){
-        songs.push(element.href.split(`/${folder}/`)[1])
-    }
+    let a = await fetch (`/${folder}/songs.json`);
+let response = await a.json();
+// let div = document.createElement("div");
+// div.innerHTML = response;
+// let as = div.getElementsByTagName("a");
+//  songs = []
+// for (let index = 0; index < as.length; index++) {
+//     const element = as[index];
+// if(element.href.endsWith(".mp3") || element.href.endsWith(".mp4")){
+//         songs.push(element.href.split(`/${folder}/`)[1])
+//     }
     
-}
+// }
 //show all the songs in the playList
 let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
 songUL.innerHTML = "";
-for (const song of songs) {
+for (const song of response) {
     songUL.innerHTML = songUL.innerHTML +  `<li>
   <img class="invert" src="img/music.svg" alt="#">
                         <div class="info">
@@ -88,25 +88,45 @@ const playMusic = (track, pause = false) =>{
 
 async function displayAlbums() {
     console.log("displaying albums");
-    let a = await fetch(`/songs/`);
-    let response = await a.text();
-    let div = document.createElement("div");
-    div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a");
+    let a = await fetch(`/songs/songs.json`);
+    let response = await a.json();
+    // let div = document.createElement("div");
+    // div.innerHTML = response;
+    // let anchors = div.getElementsByTagName("a");
     let cardContainer = document.querySelector(".cardContainer");
-
-    let array = Array.from(anchors);
+    cardContainer.innerHTML = "";
+    // let array = Array.from(anchors);
    
-        for (let index = 0; index < array.length; index++) {
-            const e = array[index];
+    //     for (let index = 0; index < array.length; index++) {
+    //         const e = array[index];
             
         
-        if (e.href.includes("/songs/")){
-            let folder = e.href.split("/").slice(-1)[0];
-            //meta data of the folder
+    //     if (e.href.includes("/songs/")){
+    //         let folder = e.href.split("/").slice(-1)[0];
+    //         //meta data of the folder
 
+    //         let a = await fetch(`/songs/${folder}/info.json`);
+    //         let response = await a.json();
+    //         cardContainer.innerHTML += `
+    //         <div data-folder="${folder}" class="card">
+    //             <div class="play">
+    //                 <svg viewBox="0 0 24 24" aria-hidden="true">
+    //                     <path d="M5 3l14 9-14 9V3z" fill="black" />
+    //                 </svg>
+    //             </div>
+    //             <img src="/songs/${folder}/cover.jpg" alt="Cover">
+    //             <h2>${response.title}</h2>
+    //             <p>${response.description}</p>
+    //         </div>`;
+    //     }
+    // }
+
+    for (const folder of response) {
+        try {
+            // Har folder ke andar se info.json uthayein
             let a = await fetch(`/songs/${folder}/info.json`);
             let response = await a.json();
+
             cardContainer.innerHTML += `
             <div data-folder="${folder}" class="card">
                 <div class="play">
@@ -118,6 +138,8 @@ async function displayAlbums() {
                 <h2>${response.title}</h2>
                 <p>${response.description}</p>
             </div>`;
+        } catch (error) {
+            console.error(`Error loading album: ${folder}`, error);
         }
     }
 
