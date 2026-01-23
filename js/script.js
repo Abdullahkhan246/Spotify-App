@@ -63,12 +63,12 @@ return songs;
 
 
 //for play music
-const playMusic = (track, pause = false) =>{
-
+const playMusic = async (track, pause = false) =>{
+    currentSong.pause();
     currentSong.src = `/${currFolder}/` + track;
     
   if (!pause) {
-    currentSong.play();
+     await currentSong.play();
     play.src = "img/play.svg";
   } else {
     play.src = "img/pause.svg";
