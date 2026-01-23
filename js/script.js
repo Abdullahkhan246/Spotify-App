@@ -68,8 +68,13 @@ const playMusic = async (track, pause = false) =>{
     currentSong.src = `/${currFolder}/` + track;
     
   if (!pause) {
-     await currentSong.play();
-    play.src = "img/play.svg";
+    try{
+        await currentSong.play();
+        play.src = "img/play.svg";
+    }
+    catch(error){
+        console.log("Playback was interrupted or blocked by browser:", error);
+    }
   } else {
     play.src = "img/pause.svg";
   }
