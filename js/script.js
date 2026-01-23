@@ -23,7 +23,7 @@ function secondsToMinutesSeconds(seconds) {
 currFolder = folder;
 
     let a = await fetch (`/${folder}/songs.json`);
-let response = await a.json();
+let songs = await a.json();
 // let div = document.createElement("div");
 // div.innerHTML = response;
 // let as = div.getElementsByTagName("a");
@@ -38,7 +38,7 @@ let response = await a.json();
 //show all the songs in the playList
 let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
 songUL.innerHTML = "";
-for (const song of response) {
+for (const song of songs) {
     songUL.innerHTML = songUL.innerHTML +  `<li>
   <img class="invert" src="img/music.svg" alt="#">
                         <div class="info">
