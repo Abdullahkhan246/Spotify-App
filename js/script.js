@@ -56,6 +56,9 @@ for (const song of songs) {
 Array.from(document.querySelector(".songList").getElementsByTagName('li')).forEach( e => {
 e.addEventListener("click", element => {
     playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+    if (window.innerWidth <= 1200) {
+        document.querySelector(".left").style.left = "-120%";
+    }
        })
 });
 return songs;
@@ -155,6 +158,9 @@ async function displayAlbums() {
           songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
           // Play the first song of the new album immediately
           playMusic(songs[0]);
+          if (window.innerWidth <= 1200) { 
+            document.querySelector(".left").style.left = "0";
+        }
         })
       })
 
