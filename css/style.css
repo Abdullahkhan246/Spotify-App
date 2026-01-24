@@ -118,10 +118,10 @@ body {
     border-radius: 5px;
     background-color: #252525;
     position: relative;
-    transition: all .9s;
+    transition: all .5s;
 }
 .card:hover{
-    background-color: rgb(105, 103, 103);
+    background-color: rgb(54, 53, 53);
     cursor: pointer;
     --a: 1;
 }
@@ -135,39 +135,6 @@ body {
     object-fit: contain;
 }
 
-
-.play {
-    position: absolute; 
-    top: 155px; 
-    right: 20px;
-    width: 40px;
-    height: 35px;
-    border-radius: 50%; 
-    background-color: #1ed760; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
-    z-index: 1; 
-    opacity: 0;
-    transform: translateY(10px); 
-    transition: all 0.7s ease; 
-  }
-  
-  .play svg {
-    width: 24px;
-    height: 24px;
-    fill: black; 
-    margin-left: 2px;
-    position: relative;
-        left: 1px;
-      bottom: 4px;
-  }
-  
-  .card:hover .play {
-    opacity: 1;
-    transform: translateY(-8px); 
-  }
 
 .buttons>* {
     margin: 0 12px;
